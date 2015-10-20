@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- jQuery -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+    <title>Contact list app</title>
+</head>
+<body>
+<div ng-controller= "AppCtrl">
+
+<div class= "container">
+      <h1>Contact list app</h1>
+   <div class= "row">
+
+  <!-- Button trigger add modal -->
+  <button type="button" id= "displayForm" class= "btn btn-primary btn-md col-md-offset-10 " data-toggle="modal" data-target="#formadd">Add
+  </button>
+
+  <!-- Button trigger notify modal -->
+  <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#notify">
+  Notify
+  </button>
+</div>      
+
+<table class ="table table-striped ">
+<thead>
+<tr>
+   <th>Select</th>
+   <th>Name</th>
+   <th>Email</th>
+   <th>Number</th>
+   <th>Action</th>
+</tr>
+</thead>
+<tbody>
+<!--<tr>
+    <td><input class= "form-control" ng-model= "contact.name"></td>
+    <td><input class= "form-control" ng-model= "contact.email"></td>
+    <td><input class= "form-control" ng-model= "contact.number"></td>
+    <td><button class= "btn btn-primary" ng-click= "addContact()">Add Contact</button></td>
+    <td><button class= "btn btn-primary" ng-click= "update()">Update</button></td>
+ </tr>-->
+<tr ng-repeat="contact in contactlist">
+    <td><input type= "checkbox"></td>
+    <td>{{contact.name}}</td>
+    <td>{{contact.email}}</td>
+    <td>{{contact.number}}</td>
+    <td><a class= "btn btn-danger glyphicon glyphicon-trash" ng-click= "remove(contact._id)"> </a>  <a class= "btn btn-warning glyphicon glyphicon-pencil" <a data-toggle="modal" data-target="#formadd" ng-click= "edit(contact._id)"></a></td>
+</tr>    
+</tbody>
+</table>
+</div>
+
+
+<!-- Add form Modal -->
+<div class="modal fade" id="formadd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Users</h4>
+      </div>
+
+      <div class="modal-body">
+        <form class= "form-horizontal"> 
+        <div class= "container"> 
+
+        <div class="form-group">   
+         <tr>
+            <td><label class= "col-sm-2 control-label" for="firstname">Full Name:</label></td>
+            <td><input type="text" name="name" ng-model= "contact.name" required autofocus/>
+            </td>
+        </tr>
+        </div>
+
+        <div class="form-group">
+        <tr>
+            <td><label class= "col-sm-2 control-label" for="email">Email:</label></td>
+            <td><input type="email" name="email" ng-model= "contact.email" required/>
+                <span ng-show="form.email.$dirty && form.email.$error.email">Not an email id!</span>
+            </td>
+        </tr>
+        </div>
+
+        <div class="form-group">
+        <tr>
+            <td><label class= "col-sm-2 control-label" for="phone">Phone:</label></td>
+            <td><input type="text" name="number" ng-model= "contact.number"maxlength="11" required /></td>
+        </tr>
+        </div>    
+        
+        </div>
+       </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type= "button "class= "btn btn-primary" ng-click= "update()">Update</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button class= "btn btn-primary" ng-click= "addContact()">Add Contact</button>
+      </div>
+    </div>
+  </div>
+</div>  
+
+<!-- Notify Modal -->
+<div class="modal fade" id="notify" tabindex="-1" role="dialog" aria-labelledby="message">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Notify</h4>
+      </div>
+
+      <div class="modal-body">
+        <form action="">
+           <input type="radio" name="select" value="Email"> Email
+           <input type="radio" name="select" value="Message"> SMS
+        </form>
+          <p> <strong>Message </strong></p>
+          <textarea rows="4" cols="50"> </textarea>  
+      </div>
+
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+    
+
+
+ <!--script for angularjs-->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+
+<script type="text/javascript" src= "/controllers/controller.js"></script>
+</body>
+</html>    
